@@ -1,59 +1,73 @@
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-
+// мне так стыдно за этот код
+// простите меня пожалуйста
 public class ConsoleInterface {
     private static final int ProblemSolved = 3;
 
-    public ConsoleInterface() {
-        System.out.println("ConsoleInterface constructor");
-        //doSomething
+    public void runProblem(int problemNum){
+        String className=getClassName(problemNum);
+        Class problem = getClass(className);
+
+        Constructor constructor = getConstructor(problem);
+        Object classObj = getObject(constructor);
     }
 
-    public void runProblem(int problemNum){
-        System.out.println("Fuck!!!");
-        try {
-            String className="com.blackwell.level_"+String.format("%02d",(int)Math.floor(problemNum/25)+1)+
-                    ".Problem_"+String.format("%03d",problemNum);
-            Class problem = Class.forName(className);
-            Constructor constructor = problem.getDeclaredConstructor();
-            Object classObj = constructor.newInstance();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (NoSuchMethodException e) {
-            e.printStackTrace();
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (InvocationTargetException e) {
-            e.printStackTrace();
+    public void printPrblemsList(){
+        for(int i =1;i<=ProblemSolved;++i){
+            String className = getClassName(i);
+            Class<?> problem = getClass(className);
+            Object classObj = getObject(problem);
+            System.out.println(i+". "+getFieldValue(problem,classObj));
         }
     }
-    public void printPrblemsList(){
+
+    // если что-то пошло не так... Jonny, we fucked
+    private Object getFieldValue(Class myClass, Object obj){
         try {
-            for(int i =0;i<ProblemSolved;++i){
-                String ClassName = getClassName(i);
-                String FieldName = "NAME";
-                Class<?> problem = Class.forName(ClassName);
-                Object classObj = problem.newInstance();
-                Field field = problem.getField(FieldName);
-                System.out.println(i+1+". "+field.get(classObj));
-            }
-        } catch (ClassNotFoundException e) { // если что-то пошло не так... Jonny, we fucked
+            Field field = myClass.getField("NAME");
+            return field.get(obj);
+        } catch (NoSuchFieldException | IllegalAccessException e) {
             e.printStackTrace();
-        } catch (NoSuchFieldException e) {
+            return null;
+        }
+    }
+    private Object getObject(Class myClass){
+        try {
+            return myClass.newInstance();
+        } catch (InstantiationException | IllegalAccessException e) {
             e.printStackTrace();
-        } catch (IllegalAccessException e) {
+            return null;
+        }
+    }
+    private Object getObject(Constructor constructor){
+        try {
+            return constructor.newInstance();
+        } catch (InstantiationException | IllegalAccessException | InvocationTargetException e) {
             e.printStackTrace();
-        } catch (InstantiationException e) {
+            return null;
+        }
+    }
+    private Class getClass(String className){
+        try {
+            return Class.forName(className);
+        } catch (ClassNotFoundException e) {
             e.printStackTrace();
+            return null;
+        }
+    }
+    private Constructor getConstructor(Class myClass){
+        try {
+            return myClass.getDeclaredConstructor();
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+            return null;
         }
     }
     private String getClassName(int problemNum){//return full class name(level,package,number)
         return "com.blackwell.level_"+String.format("%02d",(int)Math.floor(problemNum/25)+1)+
-                ".Problem_"+String.format("%03d",problemNum+1);
+                ".Problem_"+String.format("%03d",problemNum);
     }
 
 }
