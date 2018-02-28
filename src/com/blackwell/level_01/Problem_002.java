@@ -7,4 +7,7 @@ public class Problem_002 {
             "\n" + "1, 2, 3, 5, 8, 13, 21, 34, 55, 89, ...\n" +
             "\n" + "By considering the terms in the Fibonacci sequence whose values do not exceed four million, find the sum of the even-valued terms.";
 
+    public Problem_002() {
+        System.out.println(ID+"problem");
+    }
 }
