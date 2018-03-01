@@ -1,5 +1,4 @@
 import java.lang.reflect.Constructor;
-import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 // мне так стыдно за этот код
 // простите меня пожалуйста
@@ -14,19 +13,27 @@ public class ConsoleInterface {
         Object classObj = getObject(constructor);
     }
 
-    public void printPrblemsList(){
+    public void printPrblemsList(){ // print full problems list
+        ConnectionToDatabase connection = new ConnectionToDatabase();
         for(int i =1;i<=ProblemSolved;++i){
-            String className = getClassName(i);
-            Class<?> problem = getClass(className);
-            Object classObj = getObject(problem);
-            System.out.println(i+". "+getFieldValue(problem,classObj));
+            System.out.println(i+". "+connection.getCell(ConnectionToDatabase.COLUMN_TITLE,i));
         }
+        connection.closeDB();
+    }
+    public void printProblemInfo(int id){
+        ConnectionToDatabase connection = new ConnectionToDatabase();
+
+        System.out.println("Id: "+connection.getCell(ConnectionToDatabase.COLUMN_ID,id)
+                            +"\nTitle: "+connection.getCell(ConnectionToDatabase.COLUMN_TITLE,id)
+                            +"\nDescription: "+connection.getCell(ConnectionToDatabase.COLUMN_DESCRIPTION,id));
+
+        connection.closeDB();
     }
 
     // если что-то пошло не так... Jonny, we fucked
-    private Object getFieldValue(Class myClass, Object obj){
+    /*private Object getFieldValue(Class myClass, Object obj,String fieldName){
         try {
-            Field field = myClass.getField("NAME");
+            Field field = myClass.getField(fieldName);
             return field.get(obj);
         } catch (NoSuchFieldException | IllegalAccessException e) {
             e.printStackTrace();
@@ -40,7 +47,7 @@ public class ConsoleInterface {
             e.printStackTrace();
             return null;
         }
-    }
+    }*/
     private Object getObject(Constructor constructor){
         try {
             return constructor.newInstance();

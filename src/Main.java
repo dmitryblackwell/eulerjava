@@ -1,21 +1,34 @@
 import java.util.Scanner;
-/*
-git commit -m "Title" -m "Description ..........";
 
-git add .
-git reset -- somefolder_to_exclude
- */
 public class Main { // мой код - мои комменты
     public static void main(String[] args) {
         ConsoleInterface ci=new ConsoleInterface();
-
-        System.out.println("Enter problem number: \n(To see full list enter zero.)");
-        Scanner in = new Scanner(System.in);
-        int ProblemNum = in.nextInt();
-
-        if (ProblemNum == 0)
-            ci.printPrblemsList();
-        else
-            ci.runProblem(ProblemNum);
+        boolean isExit = false;
+        while (!isExit){
+            System.out.print("cmd: ");
+            Scanner in = new Scanner(System.in);
+            String cmdLine = in.nextLine();
+            String[] cmd = cmdLine.split(" ");
+            if (cmd[0].equals("print")){
+                if(cmd[1].equals("problems"))
+                    ci.printPrblemsList();
+                if(cmd[1].equals("problem"))
+                    ci.printProblemInfo(Integer.parseInt(cmd[2]));
+            }
+            if(cmd[0].equals("run"))
+                ci.runProblem(Integer.parseInt(cmd[1]));
+            if(cmd[0].equals("help"))
+                System.out.println("To run problem enter: run *ProblemNumber*" +
+                        "\nTo print all problems list enter: print problems" +
+                        "\nTo print problem info enter: print problem *ProblemNumber*" +
+                        "\nTo exit enter: exit");
+            if(cmd[0].equals("exit"))
+                isExit=true;
+        }
     }
 }
+// run 1
+// print problems
+// print problem 1
+// help
+//exit
