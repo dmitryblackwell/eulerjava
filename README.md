@@ -32,6 +32,28 @@ To do so go to
 File -> Project structure -> Libraries -> add(green plus) -> java
 ```
 Select jar file from folder libraries and heat apply.
+### Possible problems
+Sometimes module is not loaded. That's means that all folders such ass out,libraries and src doesn't show in the project three.\
+To fix it go to:\
+\
+Select JDK:
+```
+File -> Project structure -> Project -> Project JDK -> 9.0(java version 9.0.4)
+```
+Select Project language level:
+```
+File -> Project structure -> Project -> Project language level ->SDK default
+```
+Select output folder. Usually yourProjectPath/out
+```
+File -> Project structure -> Project -> Project compiler output -> %youProjectPath/out%
+```
+Import module. Select .iml-file in your project folder.
+```
+File -> Project structure -> Modules -> Add(green plus) -> Import Module ->  %youProjectPath/ProjectName.iml%
+```
+After all, don't forget to click apply button.
+ 
 # Problem Overview
 ### Problem_003
 We find a prime number by Miller-Rabin primality test. Not sure how the fuck it is working, but it does. Than in the for-loop we divide our huge number on integer: 2,3,4...etc If 
