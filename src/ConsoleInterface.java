@@ -1,16 +1,34 @@
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
+
 // мне так стыдно за этот код
 // простите меня пожалуйста
 public class ConsoleInterface {
-    private static final int ProblemSolved = 3;
+    private static final int ProblemSolved = 14;
+    private static final double MEGABYTE = 1024L * 1024L;
 
     public void runProblem(int problemNum){
         String className=getClassName(problemNum);
         Class problem = getClass(className);
 
+        DecimalFormat df = new DecimalFormat("#.###");
+        df.setRoundingMode(RoundingMode.CEILING);
+        long startTime=System.nanoTime();
+        long beforeUsedMem = Runtime.getRuntime().totalMemory()-Runtime.getRuntime().freeMemory();
+
         Constructor constructor = getConstructor(problem);
         Object classObj = getObject(constructor);
+
+
+        long afterUsedMem = Runtime.getRuntime().totalMemory()-Runtime.getRuntime().freeMemory();
+        long endTime=System.nanoTime();
+        String actualUsedMem=df.format((afterUsedMem-beforeUsedMem)/MEGABYTE);
+        String timeAtWork = df.format((endTime - startTime)*Math.pow(10,-9));
+
+        System.out.println("Memory: "+actualUsedMem+" mb;");
+        System.out.println("Time: "+ timeAtWork +" sec;");
     }
 
     public void printPrblemsList(){ // print full problems list
