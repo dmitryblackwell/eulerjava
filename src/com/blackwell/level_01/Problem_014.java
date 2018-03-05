@@ -11,8 +11,6 @@ public class Problem_014 {
                 startNumber++;
             }
             termsCount++;
-            if (termsCount > 1_000)
-                break;
         }
         return termsCount;
     }
