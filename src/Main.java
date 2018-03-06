@@ -9,7 +9,7 @@ public class Main { // мой код - мои комменты
         ci.runProblem(17);
         while (isExit){
             System.out.print("cmd: ");
-            Scanner in = new Scanner(System.in);
+            Scanner in = new Scanner(System.in); // ты пидор
             String cmdLine = in.nextLine();
             String[] cmd = cmdLine.split(" ");
             if (cmd[0].equals("print")){
