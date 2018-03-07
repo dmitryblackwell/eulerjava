@@ -7,42 +7,34 @@ public class Problem_017 {
 
     private String getNumWords(int num){
         String numWord="";
+        if (num == 1000)
+            return "onethousand";
 
         int hundreds = (int) Math.floor(num/100);
         if ( hundreds > 0)
-            numWord += basicWords[hundreds] + basicWords[27]+ "and";
+            numWord += basicWords[hundreds-1] + basicWords[27];
 
         int coins= num%100;
+        if (hundreds > 0 && coins >0)
+            numWord += "and";
+
         if (coins > 0 && coins < 21)
             numWord += basicWords[coins-1];
         else if(coins>20 && coins<100) {
             int dozen=(int) Math.floor(coins/10) - 3 + 20;
-            int ones = coins%10 -1;
-            numWord += basicWords[dozen] + basicWords[ones];
+            numWord += basicWords[dozen];
+            if (coins%10 != 0)
+               numWord += basicWords[coins%10 -1];
         }
         return numWord;
     }
     
     public Problem_017() {
-        System.out.println(getNumWords(0));
-        System.out.println(getNumWords(1));
-        System.out.println(getNumWords(5));
-        System.out.println(getNumWords(11));
-        System.out.println(getNumWords(16));
-        System.out.println(getNumWords(20));
-        System.out.println(getNumWords(25));
-        System.out.println(getNumWords(30)); //error here
-        System.out.println(getNumWords(50));
-        System.out.println(getNumWords(100));
-        System.out.println(getNumWords(101));
-        System.out.println(getNumWords(105));
-        System.out.println(getNumWords(110));
-        System.out.println(getNumWords(120));
-        System.out.println(getNumWords(130));
-        System.out.println(getNumWords(134));
-        System.out.println(getNumWords(150));
-        System.out.println(getNumWords(456));
-        System.out.println(getNumWords(500));
-        System.out.println(getNumWords(999));
+        int sum=0;
+        for(int i=1;i<=1_000;++i){
+            sum += getNumWords(i).length();
+            //System.out.println(i+". "+getNumWords(i) +": " +getNumWords(i).length());
+        }
+        System.out.println(sum);
     }
 }
