@@ -6,7 +6,7 @@ public class Main { // мой код - мои комменты
     public static void main(String[] args) {
         ConsoleInterface ci=new ConsoleInterface();
         boolean isExit = false;
-        ci.runProblem(21);
+        ci.runProblem(19);
         while (isExit){
             System.out.print("cmd: ");
             Scanner in = new Scanner(System.in); // ты пидор
