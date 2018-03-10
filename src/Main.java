@@ -1,12 +1,16 @@
+import com.blackwell.level_01.Problem_021;
+import com.blackwell.level_01.Problem_025;
+
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.util.Scanner;
-
+// TODO history of cmd activity
 public class Main { // мой код - мои комменты
     public static void main(String[] args) {
         ConsoleInterface ci=new ConsoleInterface();
         boolean isExit = false;
-        ci.runProblem(19);
+        // TODO fix 25 class problem (it is in the second level)
+        ci.runProblem(23);
         while (isExit){
             System.out.print("cmd: ");
             Scanner in = new Scanner(System.in); // ты пидор

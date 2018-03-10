@@ -6,7 +6,7 @@ import java.text.DecimalFormat;
 // мне так стыдно за этот код
 // простите меня пожалуйста
 public class ConsoleInterface {
-    private static final int ProblemSolved = 14;
+    private static final int ProblemSolved = 3;
     private static final double MEGABYTE = 1024L * 1024L;
 
     public void runProblem(int problemNum){

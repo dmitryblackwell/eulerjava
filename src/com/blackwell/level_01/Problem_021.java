@@ -1,7 +1,7 @@
 package com.blackwell.level_01;
 
 public class Problem_021 {
-    private int findDivisorsSum(int n){
+    public int findDivisorsSum(int n){
         int sum=1; //because there are already count in number and 1
         for(int i=2; i<Math.sqrt(n); ++i)
             if(n%i == 0)

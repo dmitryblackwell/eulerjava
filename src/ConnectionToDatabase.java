@@ -17,7 +17,7 @@ public class ConnectionToDatabase {
             e.printStackTrace();
         }
         try {
-            conn = DriverManager.getConnection("jdbc:sqlite:ProblemsInfo.db");
+            conn = DriverManager.getConnection("jdbc:sqlite:src/com/blackwell/data/ProblemsInfo.db");
             statement = conn.createStatement();
         } catch (SQLException e) {
             e.printStackTrace();
