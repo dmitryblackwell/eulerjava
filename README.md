@@ -15,7 +15,7 @@ print problems
 ```
 To print problem info enter:
 ```
-print problem %ProblemNumber%
+info %ProblemNumber%
 ```
 To get help enter: 
 ```

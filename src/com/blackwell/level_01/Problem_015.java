@@ -16,7 +16,6 @@ public class Problem_015 {
                 .divide( factorial(x).multiply(factorial(y)) );
         //easy to say (x+y)! / x!y!
         System.out.println(result);
-        System.out.println("fdf");
     }
 }
 //1 -> 2

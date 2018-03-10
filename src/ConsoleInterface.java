@@ -16,7 +16,7 @@ public class ConsoleInterface {
         DecimalFormat df = new DecimalFormat("#.###");
         df.setRoundingMode(RoundingMode.CEILING);
         long startTime=System.nanoTime();
-        long beforeUsedMem = Runtime.getRuntime().totalMemory()-Runtime.getRuntime().freeMemory();
+        //long beforeUsedMem = Runtime.getRuntime().totalMemory()-Runtime.getRuntime().freeMemory();
 
         Constructor constructor = getConstructor(problem);
         Object classObj = getObject(constructor);
@@ -24,10 +24,10 @@ public class ConsoleInterface {
 
         long afterUsedMem = Runtime.getRuntime().totalMemory()-Runtime.getRuntime().freeMemory();
         long endTime=System.nanoTime();
-        String actualUsedMem=df.format((afterUsedMem-beforeUsedMem)/MEGABYTE);
+        //String actualUsedMem=df.format((afterUsedMem-beforeUsedMem)/MEGABYTE);
         String timeAtWork = df.format((endTime - startTime)*Math.pow(10,-9));
 
-        System.out.println("Memory: "+actualUsedMem+" mb;");
+        //System.out.println("Memory: "+actualUsedMem+" mb;");
         System.out.println("Time: "+ timeAtWork +" sec;");
     }
 
@@ -48,24 +48,6 @@ public class ConsoleInterface {
         connection.closeDB();
     }
 
-    // если что-то пошло не так... Jonny, we fucked
-    /*private Object getFieldValue(Class myClass, Object obj,String fieldName){
-        try {
-            Field field = myClass.getField(fieldName);
-            return field.get(obj);
-        } catch (NoSuchFieldException | IllegalAccessException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-    private Object getObject(Class myClass){
-        try {
-            return myClass.newInstance();
-        } catch (InstantiationException | IllegalAccessException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }*/
     private Object getObject(Constructor constructor){
         try {
             return constructor.newInstance();
@@ -91,7 +73,8 @@ public class ConsoleInterface {
         }
     }
     private String getClassName(int problemNum){//return full class name(level,package,number)
-        return "com.blackwell.level_"+String.format("%02d",(int)Math.floor(problemNum/25)+1)+
+        int LevelNum = (int)Math.floor(problemNum/25) + (problemNum%25 == 0 ? 0 : 1);
+        return "com.blackwell.level_"+String.format("%02d",LevelNum)+
                 ".Problem_"+String.format("%03d",problemNum);
     }
 
