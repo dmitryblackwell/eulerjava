@@ -10,7 +10,7 @@ public class Main { // мой код - мои комменты
         ConsoleInterface ci=new ConsoleInterface();
         boolean isExit = false;
         // TODO fix 25 class problem (it is in the second level)
-        ci.runProblem(23);
+        ci.runProblem(24);
         while (isExit){
             System.out.print("cmd: ");
             Scanner in = new Scanner(System.in); // ты пидор
