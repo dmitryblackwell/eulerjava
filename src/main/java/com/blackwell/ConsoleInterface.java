@@ -38,9 +38,8 @@ public class ConsoleInterface {
     public void printProblemInfo(int id){
         EulerProblemHelper eulerProblemHelper = new EulerProblemHelper();
         try {
-            System.out.println("Id: " + id
-                                +"\nTitle: " + eulerProblemHelper.getTitle(id)
-                                +"\nDescription\n: " + eulerProblemHelper.getDescription(id));
+            System.out.println("\nTitle: " + eulerProblemHelper.getTitle(id)
+                                +"\nDescription:\n" + eulerProblemHelper.getDescription(id));
         } catch (IOException e) {
             System.out.println("Something went wrong (maybe internet connection).");
         };
