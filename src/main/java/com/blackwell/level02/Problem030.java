@@ -13,7 +13,7 @@ public class Problem030 {
 
     public Problem030() {
         int sum = 0;
-        for(int i=10_000; i<100_000; ++i)
+        for(int i=10; i<1_000_000; ++i)
             if (getSumOfFifth(i) == i)
                 sum += i;
         System.out.println(sum);
